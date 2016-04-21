@@ -24,11 +24,11 @@
 
 Route::group(['middleware' => ['web']], function () {
                         
-    Route::get('/', function () {
-     return view('welcome');
-    });
+//    Route::get('/', function () {
+//     return view('welcome');
+//    });
     
-    
+    Route::get('/','Server@deploy');
     Route::get('bucket_test','couchbase_test@bucket_test');
     Route::get('login','couchbase_test@login');
     Route::post('bucket_test','couchbase_test@bucket_test');
