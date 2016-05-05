@@ -24,21 +24,28 @@
 
 Route::group(['middleware' => ['web']], function () {
                         
-//    Route::get('/', function () {
-//     return view('welcome');
-//    });
+    Route::get('/', function () {
+     return view('welcome');
+    });
     
     Route::get('/','Server@deploy');
+    Route::get('dataview/','Server@dataview');
     Route::get('bucket_test','couchbase_test@bucket_test');
     Route::get('login','couchbase_test@login');
     Route::post('bucket_test','couchbase_test@bucket_test');
     Route::resource('users', 'user_auth');
     Route::get('user_profile','UserProfileController@user_profile');
     Route::post('user_profile','UserProfileController@user_profile');
+//    Route::post('excel','UserProfileController@excel');
     
     if (file_exists(__DIR__.'/controllers/Server.php')) {
 	    Route::get('/deploy', 'Server@deploy');
     }
+    
+    Route::controller('datatables', 'DatatablesController', [
+    'anyData'  => 'datatables.data',
+    'getIndex' => 'datatables',
+]);
 
 //    Route::get('diro_home','Diro_homeController@index');
 //    
