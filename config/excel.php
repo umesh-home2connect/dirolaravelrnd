@@ -442,7 +442,7 @@ return array(
         |
         */
 
-        'ignoreEmpty'             => false,
+        'ignoreEmpty'             => TRUE,
 
         /*
         |--------------------------------------------------------------------------
@@ -455,7 +455,7 @@ return array(
         | When set to true, it will return a sheet collection instead.
         |
         */
-        'force_sheets_collection' => true,
+        'force_sheets_collection' => TRUE,
 
         /*
         |--------------------------------------------------------------------------
@@ -473,7 +473,7 @@ return array(
             | Enable/disable date formatting
             |--------------------------------------------------------------------------
             */
-            'enabled' => true,
+            'enabled' => false,
 
             /*
             |--------------------------------------------------------------------------

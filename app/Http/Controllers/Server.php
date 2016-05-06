@@ -240,20 +240,40 @@ class Server extends Controller
 //});
 //   end code not in use
 // -----------------------------------------------------------------------------------          
-    //For Filename.xls file read       
-   Excel::load('storage/exports/phonebookexcel.xls', function($reader) {
-
-     // Getting all results
+    //Code for fetching data from excel-sheet and make a object for further processing
+   Excel::selectSheets('Sheet1')->load('storage/exports/phonebookexcel.xls', function($reader) {
     $results = $reader->get();
-
-    // ->all() is a wrapper for ->get() and will work the same
-    $results = $reader->all();
-//    $data = $row->firstname;
-//    $reader->get()->groupBy('firstname');
-//    p($reader);
-//    p($reader->first());
-    p($reader->limit(10));
 //    p($results);
+    $contact_array = array();
+    foreach($results as $key => $value){
+        foreach($value as $val){
+            $cont_obj = new \stdClass(); 
+
+            $cont_obj->sno              = isset($val['sno']) ? $val['sno'] : '' ;
+            $cont_obj->prefix_name      = isset($val['prefix_name']) ? $val['prefix_name'] : '' ;
+            $cont_obj->first_name       = isset($val['first_name'])? $val['first_name']: '';
+            $cont_obj->middle_name      = isset($val['middle_name']) ? $val['middle_name'] : '' ;
+            $cont_obj->last_name        = isset($val['last_name']) ? $val['last_name']: '' ;
+            $cont_obj->suffix_name      = isset($val['suffix_name ']) ? $val['suffix_name'] : '' ;
+            $cont_obj->nick_name        = isset($val['nick_name']) ? $val['nick_name'] : '' ;
+            $cont_obj->image_url        = isset($val['image_url']) ? $val['image_url'] : '' ;
+            $cont_obj->phone_numberhome = isset($val['phone_numberhome']) ? $val['phone_numberhome'] : '' ;
+            $cont_obj->phone_numberwork = isset($val['phone_numberwork']) ? $val['phone_numberwork'] : '' ;
+            $cont_obj->email            = isset($val['email']) ? $val['email']: '';
+            $cont_obj->addressstreet    = isset($val['addressstreet']) ? $val['addressstreet'] : '' ;
+            $cont_obj->city             = isset($val['city']) ? $val['city'] : '' ;
+            $cont_obj->state            = isset($val['state'])?$val['state'] : '';
+            $cont_obj->zip              = isset($val['zip']) ? $val['zip'] : '' ;
+            $cont_obj->country          = isset($val['country']) ? $val['country'] : '' ;
+            $cont_obj->company          = isset($val['company']) ? $val['company'] : '' ;
+            $cont_obj->position         = isset($val['position']) ? $val['position'] : '';
+            $cont_obj->department       = isset($val['department']) ? $val['department'] : '';
+            $cont_obj->notes            = isset($val['notes']) ? $val['notes'] : '' ;
+            $cont_obj->website          = isset($val['website']) ? $val['website'] : '' ;
+            array_push($contact_array, $cont_obj);
+        }
+    }
+    p($contact_array);
 
 });
 
